@@ -12,9 +12,5 @@
     <build>
         <finalName>spring_cloud_demo</finalName>
     </build>
-    <modules>
-        <module>producer</module>
-        <module>eureka_server</module>
-    </modules>
 
 </project>

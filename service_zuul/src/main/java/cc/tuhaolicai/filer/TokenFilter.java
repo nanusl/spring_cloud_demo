@@ -4,6 +4,7 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 public class TokenFilter extends ZuulFilter {
 
     private static Logger log = LoggerFactory.getLogger(TokenFilter.class);
+
+    @Value("${foo}")
+    private String foo;
 
     /**
      * @return 过滤器类型
@@ -74,7 +78,7 @@ public class TokenFilter extends ZuulFilter {
             }
             return null;
         }
-        log.info("ok");
+        log.info("__________________________________________" + foo);
         return null;
     }
 }
