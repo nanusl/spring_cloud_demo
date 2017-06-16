@@ -2,6 +2,7 @@ package cc.tuhaolicai.filer;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,10 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class TokenFilter extends ZuulFilter {
 
+    @Value("${token}")
+    String token;
+
     private static Logger log = LoggerFactory.getLogger(TokenFilter.class);
 
-    @Value("${foo}")
-    private String foo;
 
     /**
      * @return 过滤器类型
@@ -64,21 +66,29 @@ public class TokenFilter extends ZuulFilter {
      */
     @Override
     public Object run() {
+        String msg = null;
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         log.info(String.format("%s >>> %s", request.getMethod(), request.getRequestURL().toString()));
-        Object accessToken = request.getParameter("token");
-        if (accessToken == null) {
-            log.warn("token is empty");
+        String accessToken = request.getParameter("token");
+        if (StringUtils.isNotBlank(accessToken)) {
+            if (token.equals(accessToken))
+                log.info("token verify succeed");
+            else {
+                msg = "token is error";
+            }
+        } else
+            msg = "token is empty";
+
+        if (StringUtils.isNotBlank(msg)) {
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(401);
             try {
-                ctx.getResponse().getWriter().write("token is empty");
-            } catch (Exception e) {
+                ctx.getResponse().getWriter().write(msg);
+            } catch (Exception ignored) {
             }
-            return null;
         }
-        log.info("__________________________________________" + foo);
+
         return null;
     }
 }

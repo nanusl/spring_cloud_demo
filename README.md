@@ -12,7 +12,7 @@
  * Ribbon负载均衡客户端 http://localhost:8783/hi?name=xx
     * Hystrix仪表盘 http://localhost:8783/hystrix/
  
- * Zuul路由网关：
+ * Zuul路由网关(Bus自动配置)：
     * http://localhost:8785/api-a/hi?name=xx
     * http://localhost:8785/api-b/hi?name=xx
     
