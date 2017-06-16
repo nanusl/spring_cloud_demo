@@ -21,5 +21,8 @@
  
  * Zipkin服务器： http://localhost:9411
  
+# 注意事项
+    * Spring Cloud Bus 需要安装Rabbitmq。
+ 
  
  
