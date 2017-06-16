@@ -12,5 +12,15 @@
     <build>
         <finalName>spring_cloud_demo</finalName>
     </build>
+    <modules>
+        <module>config_server</module>
+        <module>consumer/service_feign</module>
+        <module>consumer/service_ribbon</module>
+        <module>producer/eureka_client_8781</module>
+        <module>producer/eureka_client_8782</module>
+        <module>server_eureka</module>
+        <module>server_zipkin</module>
+        <module>service_zuul</module>
+    </modules>
 
 </project>
