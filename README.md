@@ -10,6 +10,9 @@
  * Zuul路由网关：
     * http://localhost:8785/api-a/hi?name=xx
     * http://localhost:8785/api-b/hi?name=xx
+    
+ * 配置服务器： http://localhost:8888/
+    * 客户端 http://localhost:8889/
  
  
  
